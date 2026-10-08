@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-10-08 — v0.2.1: review fixes
+
+- Softened "every entry checked" to spot-checked + preprint labels.
+- Fixed CaMeL entry to the paper's own numbers (77% AgentDojo with provable
+  security vs 84% undefended); dropped the secondary-source 949-run claim.
+- Moved general governance (NIST RMF, EU AI Act, safety cases, auditing,
+  open problems) to the appendix; governance section is agent-scoped only.
+- Guardrail table Status column marked "as of 2026-10".
+- Trimmed overlapping intro paragraphs; agent-only rule now covers
+  standards/controls applied to agent deployments.
+- Spot-checked 6 more 2026 preprints against arXiv abstracts; trimmed two
+  descriptions to abstract-confirmed claims.
+
 ## 2026-10-08 — v0.2.0: quality pass
 
 - Removed duplicate entries (each paper linked once).

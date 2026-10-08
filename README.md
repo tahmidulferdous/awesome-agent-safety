@@ -11,9 +11,9 @@
 
 ### Why this list
 
-Chat-model safety lists stop at refusal and toxicity. Agents perceive, remember, plan, call tools, spend money, and change state — so their risks live in the loop: persistent memory poisoning, tool hijacking, MCP/A2A protocol abuse, multi-agent collusion, irreversible actions. The neighboring lists each cover a slice (security papers, governance tooling, incident corpora); this is the holistic, agent-only view. Every entry was checked against its source, non-agent foundations are quarantined in the appendix, and the guardrail table below compares the defenses head-to-head instead of just linking them.
+Chat-model safety lists stop at refusal and toxicity. Agents perceive, remember, plan, call tools, spend money, and change state — so their risks live in the loop: persistent memory poisoning, tool hijacking, MCP/A2A protocol abuse, multi-agent collusion, irreversible actions. The neighboring lists each cover a slice (security papers, governance tooling, incident corpora); this is the holistic, agent-only view. Entries are spot-checked against their sources, 2026 papers are labeled preprint, general foundations are quarantined in the appendix, and the guardrail table below compares the defenses head-to-head instead of just linking them.
 
-Scope: threat models, autonomy risks, prompt injection / jailbreaks (agent-specific), memory / RAG / tool / MCP-A2A security, guardrails & runtime defenses, evals / benchmarks / red-teaming, incidents & failure modes, governance / safety cases / auditing, frameworks with safety hooks. An appendix lists adjacent non-agent foundations.
+Scope: threat models, autonomy risks, prompt injection / jailbreaks, memory / RAG / tool / MCP-A2A security, guardrails & runtime defenses, evals / benchmarks / red-teaming, incidents & failure modes, agent-applicable governance, frameworks with safety hooks. Rule: every entry must involve tool use, memory, multi-step autonomy, agent protocols — or be a standard/framework control applied to agent deployments.
 
 Neighbors and how this differs:
 - [ucsb-mlsec/Awesome-Agent-Security](https://github.com/ucsb-mlsec/Awesome-Agent-Security) — papers/blogs on agent security, explicitly does not separate safety vs security.
@@ -21,8 +21,6 @@ Neighbors and how this differs:
 - [h5i-dev/awesome-ai-agent-incidents](https://github.com/h5i-dev/awesome-ai-agent-incidents) — incident corpus.
 - [AbdelStark/awesome-ai-safety](https://github.com/AbdelStark/awesome-ai-safety) — general AI safety, not agent-specific.
 - [natnew/awesome-agentops](https://github.com/natnew/awesome-agentops) — production ops with guardrails section.
-
-This list is holistic and agent-only: every entry must involve tool use, memory, multi-step autonomy, or agent protocols.
 
 ## Contents
 
@@ -53,14 +51,14 @@ This list is holistic and agent-only: every entry must involve tool use, memory,
 - [A Survey on Agentic Security: Applications, Threats and Defenses](https://arxiv.org/abs/2510.06445) (2025) — Holistic taxonomy over ~260 papers with lifecycle + cost trade-offs. List: [kagnlp/Awesome-Agentic-Security](https://github.com/kagnlp/Awesome-Agentic-Security).
 - [SoK: The Attack Surface of Agentic AI — Tools and Autonomy](https://arxiv.org/abs/2603.22928) (2026, preprint) — Attack surface across decision loops, tool interfaces, environment feedback.
 - [TRiSM for Agentic AI](https://arxiv.org/abs/2506.04133) (2025) — Trust, Risk, Security Management framework for multi-agent deployments.
-- [SoK: When Safe Agents Fail Together](https://arxiv.org/abs/2609.00595) (2026, preprint) — Multi-agent systemic failure: 197 works, 6 interfaces, 4 adversary positions, 8 paths; audits 44 benches.
+- [SoK: When Safe Agents Fail Together](https://arxiv.org/abs/2609.00595) (2026, preprint) — Multi-agent systemic failure: 197 works, 6 interfaces, 4 adversary positions, 8 attack paths.
 
 ## Autonomy Risks — Deception, Reward Hacking, CoT Faithfulness
 
 - [The Chronos Vulnerability: Temporal Persistence and Memory-Based Deception](https://arxiv.org/abs/2607.19433) (2026, preprint) — MINJA / sleeper-agent / session-smuggling threat model for stateful agents.
 - [A Concrete Roadmap towards Safety Cases based on Chain-of-Thought Monitoring](https://arxiv.org/abs/2510.19476) (2025) — Safety cases from automated CoT monitoring.
 - [Emergent Strategic Reasoning Risks in AI: A Taxonomy-Driven Evaluation Framework](https://arxiv.org/abs/2604.22119) (2026, preprint) — Evaluation gaming, steganography, deceptive reasoning traces.
-- [GDM AI Control Roadmap](https://arxiv.org/abs/2607.13087) (2026, preprint) — D1–D4/R1–R3 detection-response tiers + TRAIT&R threat model for insider-misaligned agents.
+- [GDM AI Control Roadmap](https://arxiv.org/abs/2607.13087) (2026, preprint) — Blueprint for internal security against potentially misaligned agents: conservative threat modelling + multiple layers of defence.
 
 ## Prompt Injection & Jailbreaks (Agent-Specific)
 
@@ -85,7 +83,7 @@ Rule: open-source or source-available with repo; commercial API-only noted as su
 
 ### Guardrail comparison
 
-| Tool | License | MCP-aware | Status |
+| Tool | License | MCP-aware | Status (as of 2026-10) |
 | --- | --- | --- | --- |
 | LlamaFirewall | MIT (code) | — | Maintained (Meta) |
 | PromptGuard 2 | Llama Community (model) | — | Maintained (Meta) |
@@ -107,7 +105,7 @@ Rule: open-source or source-available with repo; commercial API-only noted as su
 
 - [LlamaFirewall](https://github.com/meta-llama/PurpleLlama/tree/main/LlamaFirewall) (Meta, MIT code) — Layered agent guardrail: PromptGuard + alignment check + CodeShield + regex for tool flows.
 - [PromptGuard 2](https://github.com/meta-llama/PurpleLlama/tree/main/Llama-Prompt-Guard-2) (Meta) — Lightweight classifier for injection/jailbreak on inputs + untrusted tool content.
-- [CaMeL: Defeating Prompt Injections by Design](https://arxiv.org/abs/2503.18813) (Google DeepMind, 2025) — Capability-based information-flow control: control/data flows extracted from the trusted query, policies enforced at tool calls; 0 successful attacks across 949 AgentDojo runs with provable guarantees. Code: [google-research/camel-prompt-injection](https://github.com/google-research/camel-prompt-injection) (Apache-2.0, research artifact — not a maintained product).
+- [CaMeL: Defeating Prompt Injections by Design](https://arxiv.org/abs/2503.18813) (Google DeepMind, 2025) — Capability-based information-flow control: control/data flows extracted from the trusted query, policies enforced at tool calls; paper reports 77% of AgentDojo tasks with provable security (vs 84% undefended). Code: [google-research/camel-prompt-injection](https://github.com/google-research/camel-prompt-injection) (Apache-2.0, research artifact — not a maintained product).
 - [NeMo Guardrails](https://github.com/NVIDIA-NeMo/Guardrails) (NVIDIA, Apache-2.0) — Programmable input/dialog/retrieval/execution/output rails (Colang) with MCP hooks.
 - [Guardrails AI](https://github.com/guardrails-ai/guardrails) (Apache-2.0) — Input/output guards + Hub validators for structured-output risk checks.
 - [Invariant Guardrails](https://github.com/invariantlabs-ai/invariant) (Apache-2.0) — Rule-based agent-trace guardrails + MCP/LLM proxy with injection detectors.
@@ -151,14 +149,11 @@ Rule: open-source or source-available with repo; commercial API-only noted as su
 
 ## Governance, Safety Cases & Auditing
 
+Agent-scoped instruments only; general AI governance lives in the appendix.
+
 - [OWASP Top 10 for Agentic Applications 2026](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026) — ASI01–ASI10 (goal hijack, tool misuse, identity abuse, supply chain, RCE, memory poisoning, inter-agent comms, cascading failures, trust exploitation, rogue agents) with mitigations. Pin version — evolves fast.
 - [OWASP Agentic Skills Top 10 (AST10 v1.0-2026)](https://owasp.org/www-project-agentic-skills-top-10) — Skill-layer risks: isolation, update drift, cross-platform reuse.
-- [NIST AI Risk Management Framework 1.0](https://www.nist.gov/itl/ai-risk-management-framework) — Govern/Map/Measure/Manage across agent lifecycle.
-- [NIST AI RMF Generative AI Profile (AI 600-1)](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) — GAI risks + actions for hallucination, data, misuse controls.
-- [EU AI Act — regulatory framework](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai) / [EU AI Act explorer](https://www.euaiact.com/) — High-risk (Ch. III) + GPAI systemic-risk duties (Art. 51/55): conformity, logging, incident reporting.
-- [Safety Cases for Frontier AI](https://arxiv.org/abs/2410.21572) (2024) — Structured safety argument + evidence pack template for release decisions.
-- [Frontier AI Auditing: Toward Rigorous Third-Party Assessment](https://arxiv.org/abs/2601.11699) (2026, preprint) — AAL-1/AAL-2 audits with deep access to verify safety claims.
-- [Open Problems in Technical AI Governance](https://arxiv.org/abs/2407.14981) (2024) — Compute verification, privacy-preserving audits, watermarking, structural controls.
+- [NIST AI RMF Generative AI Profile (AI 600-1)](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) — GAI risks + actions directly applicable to agent deployments: hallucination, data, misuse controls.
 
 ## Frameworks with Safety Hooks
 
@@ -176,6 +171,11 @@ General LLM/AI resources worth knowing; not agent-specific, so kept out of the s
 - [A Taxonomy of Systemic Risks from General-Purpose AI](https://arxiv.org/abs/2412.07780) (2024) — 13 systemic-risk categories mapped to EU AI Act systemic-risk duties.
 - [SoK: Evaluating Jailbreak Guardrails for LLMs](https://arxiv.org/abs/2506.10597) (2025) — Benchmarks external guardrails under adaptive adversaries (chat-LLM setting, not agentic).
 - [What Counts as AI Sycophancy?](https://arxiv.org/abs/2605.21778) (2026, preprint) — Taxonomy of sycophantic behaviors: truth-suppression, flattery.
+- [NIST AI Risk Management Framework 1.0](https://www.nist.gov/itl/ai-risk-management-framework) — Govern/Map/Measure/Manage across the AI lifecycle; the scaffolding agent controls hang off.
+- [EU AI Act — regulatory framework](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai) / [EU AI Act explorer](https://www.euaiact.com/) — High-risk (Ch. III) + GPAI systemic-risk duties (Art. 51/55): conformity, logging, incident reporting.
+- [Safety Cases for Frontier AI](https://arxiv.org/abs/2410.21572) (2024) — Structured safety argument + evidence pack template for release decisions.
+- [Frontier AI Auditing: Toward Rigorous Third-Party Assessment](https://arxiv.org/abs/2601.11699) (2026, preprint) — AAL-1/AAL-2 audits with deep access to verify safety claims.
+- [Open Problems in Technical AI Governance](https://arxiv.org/abs/2407.14981) (2024) — Compute verification, privacy-preserving audits, watermarking, structural controls.
 
 ## Contributing
 
