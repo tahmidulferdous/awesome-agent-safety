@@ -1,0 +1,43 @@
+name: arxiv-watch
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'  # Monday 07:00 UTC
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: write
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build digest
+        id: digest
+        run: |
+          python3 scripts/arxiv_watch.py --days 14 > /tmp/digest.md
+          echo "lines=$(wc -l < /tmp/digest.md)" >> "$GITHUB_OUTPUT"
+          if grep -q "No new agent-safety papers" /tmp/digest.md; then
+            echo "empty=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Commit seen IDs
+        if: steps.digest.outputs.empty != 'true'
+        run: |
+          git config user.name "arxiv-watch"
+          git config user.email "arxiv-watch@users.noreply.github.com"
+          git add research/arxiv-seen.txt
+          git diff --cached --quiet || git commit -m "chore: record arXiv IDs seen by weekly digest" && git push
+      - name: Open review issue
+        if: steps.digest.outputs.empty != 'true'
+        run: |
+          gh issue create \
+            --title "arXiv digest $(date +%F): candidate papers to review" \
+            --label "new-papers" \
+            --body-file /tmp/digest.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
