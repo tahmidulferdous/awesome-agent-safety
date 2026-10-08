@@ -5,7 +5,13 @@
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](LICENSE)
 [![Links checked](https://github.com/tahmidulferdous/awesome-agent-safety/actions/workflows/links.yml/badge.svg)](https://github.com/tahmidulferdous/awesome-agent-safety/actions/workflows/links.yml)
 
-A curated list of **agent-specific safety** resources — not general LLM safety. Agents perceive, remember, plan, call tools, spend money, and change state. That loop creates risks chat models don't have: persistent memory poisoning, tool hijacking, MCP/A2A protocol abuse, multi-agent collusion, irreversible actions.
+**Agent-specific safety, curated: threat models, guardrails, MCP/A2A security, evals, incidents, and governance — everything a builder needs to ship agents that don't leak, break, or get hijacked.**
+
+*Last updated: 2026-10-08 — see [CHANGELOG.md](CHANGELOG.md).*
+
+### Why this list
+
+Chat-model safety lists stop at refusal and toxicity. Agents perceive, remember, plan, call tools, spend money, and change state — so their risks live in the loop: persistent memory poisoning, tool hijacking, MCP/A2A protocol abuse, multi-agent collusion, irreversible actions. The neighboring lists each cover a slice (security papers, governance tooling, incident corpora); this is the holistic, agent-only view. Every entry was checked against its source, non-agent foundations are quarantined in the appendix, and the guardrail table below compares the defenses head-to-head instead of just linking them.
 
 Scope: threat models, autonomy risks, prompt injection / jailbreaks (agent-specific), memory / RAG / tool / MCP-A2A security, guardrails & runtime defenses, evals / benchmarks / red-teaming, incidents & failure modes, governance / safety cases / auditing, frameworks with safety hooks. An appendix lists adjacent non-agent foundations.
 
@@ -76,6 +82,28 @@ This list is holistic and agent-only: every entry must involve tool use, memory,
 ## Guardrails & Runtime Defenses
 
 Rule: open-source or source-available with repo; commercial API-only noted as such. Pin versions — several repos are archived or very new.
+
+### Guardrail comparison
+
+| Tool | License | MCP-aware | Status |
+| --- | --- | --- | --- |
+| LlamaFirewall | MIT (code) | — | Maintained (Meta) |
+| PromptGuard 2 | Llama Community (model) | — | Maintained (Meta) |
+| CaMeL | Apache-2.0 | — | Research artifact, not maintained |
+| NeMo Guardrails | Apache-2.0 | Yes (hooks) | Maintained (NVIDIA) |
+| Guardrails AI | Apache-2.0 | — | Maintained |
+| Invariant Guardrails | Apache-2.0 | Yes (proxy) | Maintained |
+| OWASP Agent Memory Guard | Apache-2.0 | — | Maintained (OWASP) |
+| MS Agent Governance Toolkit | MIT | Yes (gateway) | Maintained (Microsoft) |
+| AI-Infra-Guard | Apache-2.0 | Yes (scan) | Maintained (Tencent) |
+| cc-safety-net | MIT | — (CLI hooks) | Maintained (solo) |
+| ToolHive | Apache-2.0 | Yes (gateway) | Maintained (Stacklok) |
+| E2B | Apache-2.0 | — (sandbox) | Maintained |
+| LLM Guard | MIT | — | Archived 2026-07 — pin version |
+| Rebuff | Apache-2.0 | — | Archived 2025-05 — pin version |
+| mcp-guardian | MIT | Yes (proxy) | New — evaluate |
+| mcp-shield | Apache-2.0 | Yes (proxy) | New — evaluate |
+| Cordum | BUSL-1.1 (not OSI open-source) | Yes (gateway) | Maintained (commercial) |
 
 - [LlamaFirewall](https://github.com/meta-llama/PurpleLlama/tree/main/LlamaFirewall) (Meta, MIT code) — Layered agent guardrail: PromptGuard + alignment check + CodeShield + regex for tool flows.
 - [PromptGuard 2](https://github.com/meta-llama/PurpleLlama/tree/main/Llama-Prompt-Guard-2) (Meta) — Lightweight classifier for injection/jailbreak on inputs + untrusted tool content.
