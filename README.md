@@ -7,7 +7,7 @@
 
 A curated list of **agent-specific safety** resources — not general LLM safety. Agents perceive, remember, plan, call tools, spend money, and change state. That loop creates risks chat models don't have: persistent memory poisoning, tool hijacking, MCP/A2A protocol abuse, multi-agent collusion, irreversible actions.
 
-Scope: threat models, autonomy risks, prompt injection / jailbreaks (agent-specific), memory / RAG / tool / MCP-A2A security, guardrails & runtime defenses, evals / benchmarks / red-teaming, incidents & failure modes, governance / safety cases / auditing, frameworks with safety hooks, surveys (2024–2026).
+Scope: threat models, autonomy risks, prompt injection / jailbreaks (agent-specific), memory / RAG / tool / MCP-A2A security, guardrails & runtime defenses, evals / benchmarks / red-teaming, incidents & failure modes, governance / safety cases / auditing, frameworks with safety hooks. An appendix lists adjacent non-agent foundations.
 
 Neighbors and how this differs:
 - [ucsb-mlsec/Awesome-Agent-Security](https://github.com/ucsb-mlsec/Awesome-Agent-Security) — papers/blogs on agent security, explicitly does not separate safety vs security.
@@ -30,50 +30,46 @@ This list is holistic and agent-only: every entry must involve tool use, memory,
 - [Incidents & Failure Modes](#incidents--failure-modes)
 - [Governance, Safety Cases & Auditing](#governance-safety-cases--auditing)
 - [Frameworks with Safety Hooks](#frameworks-with-safety-hooks)
-- [Surveys (2024–2026, with citations)](#surveys-20242026-with-citations)
+- [Appendix: Adjacent (Non-Agent) Foundations](#appendix-adjacent-non-agent-foundations)
 - [Contributing](#contributing)
 
 ## Start Here
 
-- [AI Agents Under Threat: A Survey of Key Security Challenges and Future Pathways](https://arxiv.org/abs/2406.02630) (2024, ~299 cites) — Security failure modes across the perception–reasoning–action loop: memory tampering, goal hijacking, tool manipulation.
-- [Model Context Protocol (MCP): Landscape, Security Threats, and Future Research Directions](https://arxiv.org/abs/2503.23278) (2025, ~514 cites) — Definitive MCP architecture + threat model: tool discovery, authorization, execution.
+- [AI Agents Under Threat: A Survey of Key Security Challenges and Future Pathways](https://arxiv.org/abs/2406.02630) (2024) — Security failure modes across the perception–reasoning–action loop: memory tampering, goal hijacking, tool manipulation.
+- [Model Context Protocol (MCP): Landscape, Security Threats, and Future Research Directions](https://arxiv.org/abs/2503.23278) (2025) — MCP architecture + threat model: tool discovery, authorization, execution.
 - [A Survey on Autonomy-Induced Security Risks in Large Model-Based Agents](https://arxiv.org/abs/2506.23844) (2025) — Risks that scale with autonomy: memory poisoning, tool misuse, irreversible chains, reward hacking, deception.
 - [Safety at Scale: A Comprehensive Survey of Large Model and Agent Safety](https://arxiv.org/abs/2502.05206) (2025) — Maps threats → defenses → datasets for models and agents.
 - [How to evaluate control measures for LLM agents?](https://arxiv.org/abs/2504.05259) (2025) — Control evaluations + safety-case scaling (ACL1–5) for misaligned-agent containment.
 
 ## Threat Models & Taxonomies
 
-- [The AI Risk Repository](https://arxiv.org/abs/2408.12622) (2024) — 74 frameworks / 1,725 risks; causal + domain taxonomy for audit checklists.
-- [A Taxonomy of Systemic Risks from General-Purpose AI](https://arxiv.org/abs/2412.07780) (2024) — 13 systemic-risk categories mapped to EU AI Act systemic-risk duties.
+- [The lethal trifecta for AI agents](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/) (Simon Willison, 2025) — Private data + untrusted content + external communication in one agent = exfiltration by design; cut one leg.
 - [A Survey on Agentic Security: Applications, Threats and Defenses](https://arxiv.org/abs/2510.06445) (2025) — Holistic taxonomy over ~260 papers with lifecycle + cost trade-offs. List: [kagnlp/Awesome-Agentic-Security](https://github.com/kagnlp/Awesome-Agentic-Security).
-- [SoK: The Attack Surface of Agentic AI — Tools and Autonomy](https://arxiv.org/abs/2603.22928) (2026) — Attack surface across decision loops, tool interfaces, environment feedback.
+- [SoK: The Attack Surface of Agentic AI — Tools and Autonomy](https://arxiv.org/abs/2603.22928) (2026, preprint) — Attack surface across decision loops, tool interfaces, environment feedback.
 - [TRiSM for Agentic AI](https://arxiv.org/abs/2506.04133) (2025) — Trust, Risk, Security Management framework for multi-agent deployments.
-- [SoK: When Safe Agents Fail Together](https://arxiv.org/abs/2609.00595) (2026) — Multi-agent systemic failure: 197 works, 6 interfaces, 4 adversary positions, 8 paths; audits 44 benches.
+- [SoK: When Safe Agents Fail Together](https://arxiv.org/abs/2609.00595) (2026, preprint) — Multi-agent systemic failure: 197 works, 6 interfaces, 4 adversary positions, 8 paths; audits 44 benches.
 
 ## Autonomy Risks — Deception, Reward Hacking, CoT Faithfulness
 
-- [A Survey on Autonomy-Induced Security Risks in Large Model-Based Agents](https://arxiv.org/abs/2506.23844) — Memory poisoning, tool misuse, irreversible chains, reward hacking, deception + R2A2 fix.
-- [The Chronos Vulnerability: Temporal Persistence and Memory-Based Deception](https://arxiv.org/abs/2607.19433) (2026) — MINJA / sleeper-agent / session-smuggling threat model for stateful agents.
+- [The Chronos Vulnerability: Temporal Persistence and Memory-Based Deception](https://arxiv.org/abs/2607.19433) (2026, preprint) — MINJA / sleeper-agent / session-smuggling threat model for stateful agents.
 - [A Concrete Roadmap towards Safety Cases based on Chain-of-Thought Monitoring](https://arxiv.org/abs/2510.19476) (2025) — Safety cases from automated CoT monitoring.
-- [Emergent Strategic Reasoning Risks in AI: A Taxonomy-Driven Evaluation Framework](https://arxiv.org/abs/2604.22119) (2026) — Evaluation gaming, steganography, deceptive reasoning traces.
-- [What Counts as AI Sycophancy?](https://arxiv.org/abs/2605.21778) (2026) — Taxonomy of sycophantic behaviors: truth-suppression, flattery.
-- [GDM AI Control Roadmap](https://arxiv.org/abs/2607.13087) (2026) — D1–D4/R1–R3 detection-response tiers + TRAIT&R threat model for insider-misaligned agents.
+- [Emergent Strategic Reasoning Risks in AI: A Taxonomy-Driven Evaluation Framework](https://arxiv.org/abs/2604.22119) (2026, preprint) — Evaluation gaming, steganography, deceptive reasoning traces.
+- [GDM AI Control Roadmap](https://arxiv.org/abs/2607.13087) (2026, preprint) — D1–D4/R1–R3 detection-response tiers + TRAIT&R threat model for insider-misaligned agents.
 
 ## Prompt Injection & Jailbreaks (Agent-Specific)
 
-- [The Landscape of Prompt Injection Threats in LLM Agents](https://arxiv.org/abs/2602.10453) (2026) — Taxonomy + mitigations + eval practices for agents.
-- [Prompt Injection Attacks on Agentic Coding Assistants](https://arxiv.org/abs/2601.17548) (2026) — Attack surfaces across skills, tool-calling pipelines, protocol ecosystems.
-- [SoK: Rethinking Jailbreaking in the Era of Agentic AI](https://arxiv.org/abs/2609.12413) (2026) — Jailbreaks with persistent memory, tool execution, multi-agent communication.
+- [Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection](https://arxiv.org/abs/2302.12173) (Greshake et al., 2023, AISec '23) — The original indirect-prompt-injection paper: retrieved data as arbitrary code execution. Code: [greshake/llm-security](https://github.com/greshake/llm-security).
+- [The Landscape of Prompt Injection Threats in LLM Agents](https://arxiv.org/abs/2602.10453) (2026, preprint) — Taxonomy + mitigations + eval practices for agents.
+- [Prompt Injection Attacks on Agentic Coding Assistants](https://arxiv.org/abs/2601.17548) (2026, preprint) — Attack surfaces across skills, tool-calling pipelines, protocol ecosystems.
+- [SoK: Rethinking Jailbreaking in the Era of Agentic AI](https://arxiv.org/abs/2609.12413) (2026, preprint) — Jailbreaks with persistent memory, tool execution, multi-agent communication.
 - [AgentDojo](https://github.com/ethz-spylab/agentdojo) ([paper](https://arxiv.org/abs/2406.13352)) — Indirect prompt injection in stateful multi-tool tasks (97 tasks / 629 cases).
 - [InjecAgent](https://github.com/uiuc-kang-lab/InjecAgent) ([paper](https://arxiv.org/abs/2403.02691)) — Single-turn indirect injection (1,054 cases); fast IPI regression.
-- [SoK: Evaluating Jailbreak Guardrails for LLMs](https://arxiv.org/abs/2506.10597) (2025) — Benchmarks external guardrails under adaptive adversaries.
 
 ## Memory, RAG, Tool & MCP/A2A Security
 
-- [Model Context Protocol (MCP): Landscape, Security Threats, and Future Research](https://arxiv.org/abs/2503.23278) — MCP threat model: discovery, auth, execution.
 - [A survey of agent interoperability protocols: MCP, ACP, A2A, ANP](https://arxiv.org/abs/2505.02279) (2025) — Compares trust boundaries + protocol attack surfaces.
-- [A2ABreak: Systematic Security Analysis of the A2A Protocol](https://arxiv.org/abs/2609.10871) (2026) — 37-state FSM audit; 11 spec-compliant vulns (context-ID injection, multi-hop identity loss).
-- [The Emerged Security and Privacy of LLM Agent: A Survey with Case Studies](https://arxiv.org/abs/2407.19354) (2024, ~207 cites) — Data leakage via tool integration, memory, multi-agent interaction.
+- [A2ABreak: Systematic Security Analysis of the A2A Protocol](https://arxiv.org/abs/2609.10871) (2026, preprint) — 37-state FSM audit; 11 spec-compliant vulns (context-ID injection, multi-hop identity loss).
+- [The Emerged Security and Privacy of LLM Agent: A Survey with Case Studies](https://arxiv.org/abs/2407.19354) (2024) — Data leakage via tool integration, memory, multi-agent interaction.
 - [Trustworthiness in Retrieval-Augmented Generation Systems](https://arxiv.org/abs/2409.10102) (2024) — Retrieval poisoning, hallucination, privacy leakage in RAG.
 - [SoK: Privacy Risks and Mitigations in RAG Systems](https://arxiv.org/abs/2601.03979) (2026) — Extraction attacks + mitigations across stores, embeddings, query generation.
 
@@ -83,6 +79,7 @@ Rule: open-source or source-available with repo; commercial API-only noted as su
 
 - [LlamaFirewall](https://github.com/meta-llama/PurpleLlama/tree/main/LlamaFirewall) (Meta, MIT code) — Layered agent guardrail: PromptGuard + alignment check + CodeShield + regex for tool flows.
 - [PromptGuard 2](https://github.com/meta-llama/PurpleLlama/tree/main/Llama-Prompt-Guard-2) (Meta) — Lightweight classifier for injection/jailbreak on inputs + untrusted tool content.
+- [CaMeL: Defeating Prompt Injections by Design](https://arxiv.org/abs/2503.18813) (Google DeepMind, 2025) — Capability-based information-flow control: control/data flows extracted from the trusted query, policies enforced at tool calls; 0 successful attacks across 949 AgentDojo runs with provable guarantees. Code: [google-research/camel-prompt-injection](https://github.com/google-research/camel-prompt-injection) (Apache-2.0, research artifact — not a maintained product).
 - [NeMo Guardrails](https://github.com/NVIDIA-NeMo/Guardrails) (NVIDIA, Apache-2.0) — Programmable input/dialog/retrieval/execution/output rails (Colang) with MCP hooks.
 - [Guardrails AI](https://github.com/guardrails-ai/guardrails) (Apache-2.0) — Input/output guards + Hub validators for structured-output risk checks.
 - [Invariant Guardrails](https://github.com/invariantlabs-ai/invariant) (Apache-2.0) — Rule-based agent-trace guardrails + MCP/LLM proxy with injection detectors.
@@ -110,10 +107,9 @@ Rule: open-source or source-available with repo; commercial API-only noted as su
 - [A2ASecBench](https://safo-lab.github.io/A2ASecBench/) — Runnable A2A exploits (spoofing, cloaking, flooding, forgery, artifact injection) with utility trade-off.
 - [ISC-Bench](https://github.com/wuyoscar/ISC-Bench) ([paper](https://arxiv.org/abs/2603.23509)) — Workflow-induced failure: benign task structure that requires harmful output (53 scenarios).
 - [AIRTBench](https://github.com/dreadnode/AIRTBench-Code) ([paper](https://arxiv.org/abs/2506.14682)) — Autonomous red-team capability in 70 black-box CTFs; tracks offensive power.
-- [SORRY-Bench](https://github.com/SORRY-Bench/sorry-bench) ([paper](https://arxiv.org/abs/2406.14598)) — Refusal balance across 44–45 topics + 20 linguistic mutations; cheap 7B judge.
-- [Aegis2.0](https://huggingface.co/datasets/nvidia/Aegis-AI-Content-Safety-Dataset-2.0) ([paper](https://arxiv.org/abs/2501.09004)) — 12 core + 9 fine-grained hazards, ~34k dialogues for training guards.
+- [WASP: Benchmarking Web Agent Security Against Prompt Injection](https://github.com/facebookresearch/wasp) ([paper](https://arxiv.org/abs/2504.18575), NeurIPS 2025) — End-to-end web-agent hijacking in a sandboxed VisualWebArena; top models fooled by simple human-written injections.
+- [OS-Harm: Benchmarking Safety of Computer Use Agents](https://github.com/tml-epfl/os-harm) ([paper](https://arxiv.org/abs/2506.14866), NeurIPS 2025 Spotlight) — 150 OSWorld tasks across deliberate misuse, prompt injection, model misbehavior; automated judge with high human agreement.
 - [BenchJack](https://github.com/benchjack/benchjack) ([paper](https://arxiv.org/abs/2605.12673)) — Audits your agent bench for hackability (8 flaw classes, 219 flaws / 10 benches).
-- [Evaluation and Benchmarking of LLM Agents: A Survey](https://arxiv.org/abs/2507.21504) (2025, ~207 cites) — Two-dimensional taxonomy: capability objectives × eval methodologies.
 
 ## Incidents & Failure Modes
 
@@ -121,22 +117,20 @@ Rule: open-source or source-available with repo; commercial API-only noted as su
 - [Claude Code poisoned-config RCE + token exfiltration (CVE-2025-59536 / CVE-2026-21852)](https://research.checkpoint.com/2026/rce-and-api-token-exfiltration-through-claude-code-project-files-cve-2025-59536) (Check Point, 2026) — Hooks / `.mcp.json` / base-URL trust bypass; pattern for agent config review.
 - [AI Incident Database](https://incidentdatabase.ai/) — Searchable real-harm cases for regression tests + pre-deploy review.
 - [OECD AIM — AI Incidents and Hazards Monitor](https://oecd.ai/en/incidents) — ~18k records + taxonomy for governance reporting.
-- [LLM Multi-Agent Systems: Challenges and Open Problems](https://arxiv.org/abs/2402.03578) (2024, ~166 cites) — Coordination collapse, toxic debate, compounding hallucination chains.
+- [LLM Multi-Agent Systems: Challenges and Open Problems](https://arxiv.org/abs/2402.03578) (2024) — Coordination collapse, toxic debate, compounding hallucination chains.
 - [LLM-based Agents Suffer from Hallucinations](https://arxiv.org/abs/2509.18970) (2025) — Agent-specific hallucinations across perception, planning, tool use, memory retrieval.
 - [Towards Trustworthy GUI Agents](https://arxiv.org/abs/2503.23434) (2025) — Irreversible digital operations: form submission, permission grants, deletions.
 
 ## Governance, Safety Cases & Auditing
 
-Slim in v1 (researcher-builder focus); expandable for governance phase.
-
-- [OWASP Top 10 for Agentic Applications 2026](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — Build-time checklist: goal hijack, tool misuse, memory injection, rogue agents. Pin GitHub version — list evolves fast.
+- [OWASP Top 10 for Agentic Applications 2026](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026) — ASI01–ASI10 (goal hijack, tool misuse, identity abuse, supply chain, RCE, memory poisoning, inter-agent comms, cascading failures, trust exploitation, rogue agents) with mitigations. Pin version — evolves fast.
 - [OWASP Agentic Skills Top 10 (AST10 v1.0-2026)](https://owasp.org/www-project-agentic-skills-top-10) — Skill-layer risks: isolation, update drift, cross-platform reuse.
 - [NIST AI Risk Management Framework 1.0](https://www.nist.gov/itl/ai-risk-management-framework) — Govern/Map/Measure/Manage across agent lifecycle.
 - [NIST AI RMF Generative AI Profile (AI 600-1)](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) — GAI risks + actions for hallucination, data, misuse controls.
 - [EU AI Act — regulatory framework](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai) / [EU AI Act explorer](https://www.euaiact.com/) — High-risk (Ch. III) + GPAI systemic-risk duties (Art. 51/55): conformity, logging, incident reporting.
 - [Safety Cases for Frontier AI](https://arxiv.org/abs/2410.21572) (2024) — Structured safety argument + evidence pack template for release decisions.
-- [Frontier AI Auditing: Toward Rigorous Third-Party Assessment](https://arxiv.org/abs/2601.11699) (2026) — AAL-1/AAL-2 audits with deep access to verify safety claims.
-- [Open Problems in Technical AI Governance](https://arxiv.org/abs/2407.14981) (2024, ~86 cites) — Compute verification, privacy-preserving audits, watermarking, structural controls.
+- [Frontier AI Auditing: Toward Rigorous Third-Party Assessment](https://arxiv.org/abs/2601.11699) (2026, preprint) — AAL-1/AAL-2 audits with deep access to verify safety claims.
+- [Open Problems in Technical AI Governance](https://arxiv.org/abs/2407.14981) (2024) — Compute verification, privacy-preserving audits, watermarking, structural controls.
 
 ## Frameworks with Safety Hooks
 
@@ -144,34 +138,16 @@ Slim in v1 (researcher-builder focus); expandable for governance phase.
 - [Dify](https://github.com/langgenius/dify) — Agentic workflows + RAG with moderation, rate limiting, annotation logging.
 - [Composio](https://github.com/ComposioHQ/composio) — OAuth token-based IAM + task/resource scoping for tools.
 
-## Surveys (2024–2026, with citations)
+## Appendix: Adjacent (Non-Agent) Foundations
 
-Seeded from a local survey library (citations as of 2026-09-28). Agent-relevant subset; see library for full tables.
+General LLM/AI resources worth knowing; not agent-specific, so kept out of the sections above.
 
-Safety:
-- [Large Language Model Safety: A Holistic Survey](https://arxiv.org/abs/2412.17686) (2024, ~80 cites)
-- [Safety at Scale](https://arxiv.org/abs/2502.05206) (2025, ~70 cites)
-- [The Scales of Justitia: Safety Evaluation of LLMs](https://arxiv.org/abs/2506.11094) (2025, ~53 cites)
-- [SORRY-Bench](https://arxiv.org/abs/2406.14598) (2024, ~263 cites)
-
-Security (agent/MCP):
-- [Security and Privacy Challenges of LLMs](https://arxiv.org/abs/2402.00888) (2024, ~549 cites)
-- [Model Context Protocol: Landscape, Security Threats](https://arxiv.org/abs/2503.23278) (2025, ~514 cites)
-- [AI Agents Under Threat](https://arxiv.org/abs/2406.02630) (2024, ~299 cites)
-- [The Emerged Security and Privacy of LLM Agent](https://arxiv.org/abs/2407.19354) (2024, ~207 cites)
-- [A Survey on Trustworthy LLM Agents](https://arxiv.org/abs/2503.09648) (2025, ~130 cites)
-
-Agents (architectures, evals, failures):
-- [Large Language Model based Multi-Agents](https://arxiv.org/abs/2402.01680) (2024, ~1,195 cites)
-- [Memory Mechanism of LLM based Agents](https://arxiv.org/abs/2404.13501) (2024, ~796 cites)
-- [Survey on Evaluation of LLM-based Agents](https://arxiv.org/abs/2503.16416) (2025, ~227 cites)
-- [Evaluation and Benchmarking of LLM Agents](https://arxiv.org/abs/2507.21504) (2025, ~207 cites)
-- [The Emerged Security and Privacy of LLM Agent](https://arxiv.org/abs/2407.19354) (2024, ~207 cites)
-
-Governance:
-- [Open Problems in Technical AI Governance](https://arxiv.org/abs/2407.14981) (2024, ~86 cites)
-- [A Taxonomy of Systemic Risks from General-Purpose AI](https://arxiv.org/abs/2412.07780) (2024, ~31 cites)
-- [Safety cases for frontier AI](https://arxiv.org/abs/2410.21572) (2024, ~36 cites)
+- [SORRY-Bench](https://github.com/SORRY-Bench/sorry-bench) ([paper](https://arxiv.org/abs/2406.14598)) — Refusal balance across 44–45 topics + 20 linguistic mutations; cheap regression for the underlying model.
+- [Aegis2.0](https://huggingface.co/datasets/nvidia/Aegis-AI-Content-Safety-Dataset-2.0) ([paper](https://arxiv.org/abs/2501.09004)) — 12 core + 9 fine-grained hazards, ~34k dialogues for training content-safety guards.
+- [The AI Risk Repository](https://arxiv.org/abs/2408.12622) (2024) — 74 frameworks / 1,725 risks; causal + domain taxonomy for audit checklists.
+- [A Taxonomy of Systemic Risks from General-Purpose AI](https://arxiv.org/abs/2412.07780) (2024) — 13 systemic-risk categories mapped to EU AI Act systemic-risk duties.
+- [SoK: Evaluating Jailbreak Guardrails for LLMs](https://arxiv.org/abs/2506.10597) (2025) — Benchmarks external guardrails under adaptive adversaries (chat-LLM setting, not agentic).
+- [What Counts as AI Sycophancy?](https://arxiv.org/abs/2605.21778) (2026, preprint) — Taxonomy of sycophantic behaviors: truth-suppression, flattery.
 
 ## Contributing
 
