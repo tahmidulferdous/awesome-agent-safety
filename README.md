@@ -102,6 +102,7 @@ Rule: open-source or source-available with repo; commercial API-only noted as su
 | mcp-guardian | MIT | Yes (proxy) | New — evaluate |
 | mcp-shield | Apache-2.0 | Yes (proxy) | New — evaluate |
 | Cordum | BUSL-1.1 (not OSI open-source) | Yes (gateway) | Maintained (commercial) |
+| receipts | MIT | — (skill/CLI) | New — evaluate |
 
 - [LlamaFirewall](https://github.com/meta-llama/PurpleLlama/tree/main/LlamaFirewall) (Meta, MIT code) — Layered agent guardrail: PromptGuard + alignment check + CodeShield + regex for tool flows.
 - [PromptGuard 2](https://github.com/meta-llama/PurpleLlama/tree/main/Llama-Prompt-Guard-2) (Meta) — Lightweight classifier for injection/jailbreak on inputs + untrusted tool content.
@@ -120,6 +121,7 @@ Rule: open-source or source-available with repo; commercial API-only noted as su
 - [mcp-guardian](https://github.com/cyberranger93/mcp-guardian) (MIT, new) — Local MCP firewall/proxy + scanner + audit + redaction + CI action.
 - [mcp-shield](https://github.com/thuggeelya/mcp-shield) (Apache-2.0, new) — Bandit-for-MCP scanner (0–100 score) + deny/allow proxy + SARIF.
 - [Cordum](https://github.com/cordum-io/cordum) (BUSL-1.1, source-available, NOT OSI open-source) — Control plane: policy kernel + human approvals + MCP gateway + audit.
+- [receipts](https://github.com/mycelium-being/receipts) (MIT, new) — Stdlib-only skill: flags quotes absent from a source corpus and refuses done-claims that name no existing file, commit or URL.
 - Lakera Guard — commercial API only (no OSS guard repo); demo client at [lakeraai/guard-demo-client](https://github.com/lakeraai/guard-demo-client). Listed for completeness; prefer OSS above for self-hosting.
 
 ## Evals, Benchmarks & Red-Teaming
