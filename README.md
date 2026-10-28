@@ -95,6 +95,7 @@ Rule: open-source or source-available with repo; commercial API-only noted as su
 | MS Agent Governance Toolkit | MIT | Yes (gateway) | Maintained (Microsoft) |
 | AI-Infra-Guard | Apache-2.0 | Yes (scan) | Maintained (Tencent) |
 | cc-safety-net | MIT | — (CLI hooks) | Maintained (solo) |
+| HOL Guard | Apache-2.0 | Yes (supported MCP actions) | Maintained (HOL) |
 | ToolHive | Apache-2.0 | Yes (gateway) | Maintained (Stacklok) |
 | E2B | Apache-2.0 | — (sandbox) | Maintained |
 | LLM Guard | MIT | — | Archived 2026-07 — pin version |
@@ -113,6 +114,7 @@ Rule: open-source or source-available with repo; commercial API-only noted as su
 - [Microsoft Agent Governance Toolkit](https://github.com/microsoft/agent-governance-toolkit) (MIT) — Policy engine + zero-trust identity + sandboxing + MCP Security Gateway; covers 10/10 OWASP Agentic risks.
 - [Tencent AI-Infra-Guard](https://github.com/Tencent/AI-Infra-Guard) (Apache-2.0) — Full-stack red-team: Agent/MCP/Skill scan + infra CVE scan + jailbreak eval.
 - [cc-safety-net](https://github.com/kenryu42/cc-safety-net) (MIT) — Pre-execution hook blocking destructive git/rm + secret access across 14+ coding-agent CLIs.
+- [HOL Guard](https://github.com/hashgraph-online/hol-guard) (HOL, Apache-2.0) — Scans AI plugins and adds pre-action approval controls to supported coding-agent tool calls; unsupported paths remain outside coverage.
 - [ToolHive](https://github.com/stacklok/toolhive) (Apache-2.0) — Container-isolated MCP platform: registry + gateway with Cedar/OIDC authz, tool filtering, audit/OTel.
 - [E2B](https://github.com/e2b-dev/e2b) (Apache-2.0) — Isolated cloud sandboxes for agent-generated code (self-hostable).
 - [LLM Guard](https://github.com/protectai/llm-guard) (MIT, archived 2026-07) — Input/output scanners (injection, secrets, URLs, code). Pin version.
