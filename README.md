@@ -120,6 +120,7 @@ Rule: open-source or source-available with repo; commercial API-only noted as su
 - [mcp-guardian](https://github.com/cyberranger93/mcp-guardian) (MIT, new) — Local MCP firewall/proxy + scanner + audit + redaction + CI action.
 - [mcp-shield](https://github.com/thuggeelya/mcp-shield) (Apache-2.0, new) — Bandit-for-MCP scanner (0–100 score) + deny/allow proxy + SARIF.
 - [Cordum](https://github.com/cordum-io/cordum) (BUSL-1.1, source-available, NOT OSI open-source) — Control plane: policy kernel + human approvals + MCP gateway + audit.
+- [pay-safely](https://github.com/screwtapeai/pay-safely) (Screwtape.ai, MIT, new — evaluate) — Check that a seller is safe to pay before your AI agent pays.
 - Lakera Guard — commercial API only (no OSS guard repo); demo client at [lakeraai/guard-demo-client](https://github.com/lakeraai/guard-demo-client). Listed for completeness; prefer OSS above for self-hosting.
 
 ## Evals, Benchmarks & Red-Teaming
